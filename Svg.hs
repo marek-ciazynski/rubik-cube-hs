@@ -100,10 +100,10 @@ writeCubeSvg fileName = writeFile fileName . cubeToSvg
 readExampleCube fileName = do
     text <- readFile fileName
     let cube = readCube (lines text) in
-        writeCubeSvg "result.svg" cube
+        writeCubeSvg "examples/solved-cube.svg" cube
 
 main = do
     -- writeCubeSvg solvedCube
-    -- readExampleCube "solved-cube.txt"
+    readExampleCube "examples/solved-cube.txt"
     -- writeCubeSvg exampleCube
-    readExampleCube "example-cube.txt"
+    -- readExampleCube "example-cube.txt"
