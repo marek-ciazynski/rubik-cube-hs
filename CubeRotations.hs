@@ -52,39 +52,40 @@ rotationDirection r
     | r `elem` [F, B, U, D, L, R] = Clockwise
     | otherwise = AntiClockwise
 
-rotateCubeGeneric :: Reorientation -> FourCornersPos -> FourEdgesPos -> Rotation -> Cube -> Cube
-rotateCubeGeneric cornerReorientation mappedCorners mappedEdges rot cube =
+rotateCubeGeneric :: Reorientation -> FourCornersPos -> FourEdgesPos -> Rotation -> RotationDirection -> Cube -> Cube
+rotateCubeGeneric cornerReorientation mappedCorners mappedEdges rot rotDir cube =
   Cube
     { edges = [(pos edge, edgeMapping edge) | edge <- edges cube],
       corners = [(pos corner, colors $ cornerMapping corner) | corner <- corners cube],
       solution = rot : solution cube
     }
   where
-    rotDir = rotationDirection rot 
+    -- rotDir = rotationDirection rot 
     edgeMapping = getEdgeMapping rotDir cube mappedEdges
     cornerMapping = getCornerMapping rotDir cube cornerReorientation mappedCorners
 
 applyRotations :: Cube -> [Rotation] -> Cube
 applyRotations cube rotations = traceShow rotations $ foldr rotateCube cube (reverse rotations)
+-- applyRotations cube rotations = traceShow rotations $ foldr rotateCube cube (rotations)
 
 
 -- Specific rotations --
 rotateCube :: Rotation -> Cube -> Cube
 -- rotations aroud X-axis
-rotateCube L = rotateCubeX Left L
-rotateCube L' = rotateCubeX Left L'
-rotateCube R = rotateCubeX Right R'
-rotateCube R' = rotateCubeX Right R
+rotateCube L = rotateCubeX Left L Clockwise
+rotateCube L' = rotateCubeX Left L' AntiClockwise
+rotateCube R = rotateCubeX Right R AntiClockwise
+rotateCube R' = rotateCubeX Right R' Clockwise
 -- rotations aroud Y-axis
-rotateCube F = fixEdgesOrientation Front . rotateCubeY Front F
-rotateCube F' = fixEdgesOrientation Front . rotateCubeY Front F'
-rotateCube B = fixEdgesOrientation Back . rotateCubeY Back B'
-rotateCube B' = fixEdgesOrientation Back . rotateCubeY Back B
+rotateCube F = fixEdgesOrientation Front . rotateCubeY Front F Clockwise
+rotateCube F' = fixEdgesOrientation Front . rotateCubeY Front F' AntiClockwise
+rotateCube B = fixEdgesOrientation Back . rotateCubeY Back B AntiClockwise
+rotateCube B' = fixEdgesOrientation Back . rotateCubeY Back B' Clockwise
 -- rotations aroud Z-axis
-rotateCube U = rotateCubeZ Up U
-rotateCube U' = rotateCubeZ Up U'
-rotateCube D = rotateCubeZ Down D'
-rotateCube D' = rotateCubeZ Down D
+rotateCube U = rotateCubeZ Up U Clockwise
+rotateCube U' = rotateCubeZ Up U' AntiClockwise
+rotateCube D = rotateCubeZ Down D AntiClockwise
+rotateCube D' = rotateCubeZ Down D' Clockwise
 
 rotateCubeX xPos = rotateCubeGeneric reorientX mappedCorners mappedEdges where
     mappedEdges = (

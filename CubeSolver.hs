@@ -5,6 +5,7 @@ import Prelude hiding (Left, Right)
 import TestCubes (exampleCube)
 import Svg (writeCubeSvg)
 import CubeRotations (applyRotations, rotateCube)
+import Debug.Trace (traceShow)
 
 
 moveEdgeUpAlgorithm = [F, F]
@@ -29,12 +30,14 @@ findWhiteCrossEdge Cube{edges} faceColor =
 
 ---
 crossOrderColors = [Orange, Blue, Red, Green]
-crossOrder = map colorCentrePos crossOrderColors
 
 solveWhiteCross :: [Color] -> Cube -> Cube
 solveWhiteCross [] cube = cube
--- solveWhiteCross (color:colors) cube = rotateCube U (solveWhiteCross colors cube)
-solveWhiteCross (color:colors) cube = solveWhiteCross colors cube
+-- solveWhiteCross colors cube = foldl solveWhiteCrossEdge cube colors
+solveWhiteCross (color:colors) cube = solveWhiteCross colors nextCube
+    where
+        nextCube = applyRotations (solveWhiteCrossEdge cube color) [U]
+        -- nextCube = rotateCube U $ solveWhiteCrossEdge cube color
 
 solveWhiteCrossEdgeAtBottom cube edge =
     applyRotations cube $ 
