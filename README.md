@@ -8,6 +8,7 @@ To solve the cube defined in [example-cube.txt](examples/example-cube.txt) file:
 runhaskell solver.hs examples/example-cube.txt
 ```
 The program will print all rotations made to solve the cube to standard output and will save SVG visualisations for every solving phase in `results/phase$i.svg`. Input cube visualisation will be saved as `results/input.svg`.
+**WIP:** Currently only cube data structure is defined and all rotations implemented. But solver algorithm is unfinished.
 
 ## Running tests
 ```bash
