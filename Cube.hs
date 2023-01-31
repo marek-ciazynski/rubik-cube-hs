@@ -37,7 +37,7 @@ colorCentrePos Yellow = Down
 colorCentrePos Green = Left
 colorCentrePos Blue = Right
 
-data Move = F | F' | B | B' | U | U' | D | D' | L | L' | R | R'
+data Rotation = F | F' | B | B' | U | U' | D | D' | L | L' | R | R'
     deriving (Eq, Show)
 
 type Color2 = (Color, Color)
@@ -47,7 +47,7 @@ type Pos3 = (Pos, Pos, Pos)
 
 type Edge = (Pos2, Color2)
 type Corner = (Pos3, Color3)
-data Cube = Cube {edges :: [Edge], corners :: [Corner], solution :: [Move]}
+data Cube = Cube {edges :: [Edge], corners :: [Corner], solution :: [Rotation]}
 
 pos = fst
 colors = snd
