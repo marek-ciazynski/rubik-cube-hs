@@ -64,6 +64,9 @@ rotateCubeGeneric cornerReorientation mappedCorners mappedEdges rot cube =
     edgeMapping = getEdgeMapping rotDir cube mappedEdges
     cornerMapping = getCornerMapping rotDir cube cornerReorientation mappedCorners
 
+applyRotations :: Cube -> [Rotation] -> Cube
+applyRotations cube rotations = traceShow rotations $ foldr rotateCube cube (reverse rotations)
+
 
 -- Specific rotations --
 rotateCube :: Rotation -> Cube -> Cube

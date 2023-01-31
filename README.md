@@ -15,3 +15,8 @@ The program will print all rotations made to solve the cube to standard output a
 ## Input file structure
 The cube is read from text file as lists of edges and corners colors separated by single empty line. The order of edges/corners is predefined in module `CubeReader` in functions `edgesReadingOrder` and `cornersReadingOrder`. See example input files for a [randomly scrambled](examples/example-cube.txt) cube and [already solved cube](examples/solved-cube.txt).  
 Color symbols are: `W` (white - top face), `Y` (yellow - bottom face), `G` (green - left face), `O` (orange - front face), `B` (blue - right face), `R` (red - back face).
+
+## Running tests
+```bash
+runhaskell Tests.hs
+```

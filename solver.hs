@@ -1,7 +1,7 @@
 import System.Environment (getArgs)
 import Cube
-import CubeReader (readCube, readCubeFile)
-import CubeRotations
+import CubeReader (readCubeFile)
+import CubeSolver (solveCube)
 import Svg (writeCubeSvg)
 
 main = do
@@ -9,9 +9,11 @@ main = do
     let fileName = head args
     text <- readFile fileName
     cube <- readCubeFile fileName
-    writeCubeSvg "result.svg" cube
-    let rotatedCube = rotateCube R' cube
-    writeCubeSvg "rotated.svg" rotatedCube
+    writeCubeSvg "results/input.svg" cube
+
+    let resultCube = solveCube cube
+
+    writeCubeSvg "results/solved.svg" resultCube
     putStr "Moves: "
-    print $ solution rotatedCube
-    print $ rotatedCube
+    print $ solution resultCube
+    -- print $ resultCube
