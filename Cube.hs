@@ -48,6 +48,7 @@ type Pos3 = (Pos, Pos, Pos)
 type Edge = (Pos2, Color2)
 type Corner = (Pos3, Color3)
 data Cube = Cube {edges :: [Edge], corners :: [Corner], solution :: [Rotation]}
+    deriving (Eq, Show)
 
 pos = fst
 colors = snd

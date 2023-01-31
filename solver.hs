@@ -10,7 +10,8 @@ main = do
     text <- readFile fileName
     cube <- readCubeFile fileName
     writeCubeSvg "result.svg" cube
-    let rotatedCube = rotateCube B' cube
-    writeCubeSvg "rotU'.svg" rotatedCube
+    let rotatedCube = rotateCube R' cube
+    writeCubeSvg "rotated.svg" rotatedCube
     putStr "Moves: "
     print $ solution rotatedCube
+    print $ rotatedCube
