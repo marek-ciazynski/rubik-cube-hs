@@ -4,12 +4,12 @@ import Prelude hiding (Left, Right)
 
 -- Data types --
 data Color
-    = Red
-    | Orange
-    | Green
-    | Blue
+    = Orange
+    | Red
     | White
     | Yellow
+    | Green
+    | Blue
   deriving (Eq, Show)
 
 data Pos
@@ -21,7 +21,6 @@ data Pos
     | Right
     deriving (Eq, Show)
 
--- TODO these mappings are not used? remove?
 faceColor :: Pos -> Color
 faceColor Front = Orange
 faceColor Back = Red
@@ -53,16 +52,17 @@ data Cube = Cube {edges :: [Edge], corners :: [Corner], solution :: [Move]}
 pos = fst
 colors = snd
 
+
 getEdge :: Cube -> Pos2 -> Edge
 getEdge Cube{edges} pos = head $ filter matchPos edges
     where
         matchPos (p, _) = p == pos
 
-
 getCorner :: Cube -> Pos3 -> Corner
 getCorner Cube{corners} pos = head $ filter matchPos corners
     where
         matchPos (p, _) = p == pos
+
 
 colorX :: Corner -> Color
 colorX (_, (x, _, _)) = x

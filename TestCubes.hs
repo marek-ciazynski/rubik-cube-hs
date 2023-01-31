@@ -2,9 +2,11 @@ module TestCubes where
 
 import Cube
 import Prelude hiding (Left, Right)
+import Utils (splitByPredicate)
+import CubeReader (readCube)
 
-aCube :: Cube
-aCube = Cube {edges, corners, solution=[]}
+exampleCube :: Cube
+exampleCube = Cube {edges, corners, solution=[]}
     where
         edges = [
                 -- first layer
