@@ -1,7 +1,7 @@
 import System.Environment (getArgs)
 import Cube
 import CubeReader (readCubeFile)
-import CubeSolver (solveCube, swapCornersAlgorithm)
+import CubeSolver (solveCube, solveCubeWithSvgSteps)
 import Svg (writeCubeSvg)
 import Debug.Trace (traceShow)
 import CubeRotations (applyRotations)
@@ -13,8 +13,8 @@ main = do
     cube <- readCubeFile fileName
     writeCubeSvg "results/input.svg" cube
 
-    let resultCube = solveCube cube
-    -- let resultCube = applyRotations cube swapCornersAlgorithm
+    -- let resultCube = solveCube cube
+    resultCube <- solveCubeWithSvgSteps cube
 
     writeCubeSvg "results/solved.svg" resultCube
     putStr "Moves: "
