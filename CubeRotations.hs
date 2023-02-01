@@ -66,7 +66,6 @@ rotateCubeGeneric cornerReorientation mappedCorners mappedEdges rot rotDir cube 
 
 applyRotations :: Cube -> [Rotation] -> Cube
 applyRotations cube rotations = traceShow rotations $ foldr rotateCube cube (reverse rotations)
--- applyRotations cube rotations = traceShow rotations $ foldr rotateCube cube (rotations)
 
 
 -- Specific rotations --
@@ -140,36 +139,3 @@ fixEdgesOrientation yPos cube =
         fixAffected e = if isAffectedEdge e then swapColor2 e else e
         isAffectedEdge ((p1, p2), _) = p1 == yPos || p2 == yPos
         swapColor2 (pos, (c1,c2)) = (pos, (c2,c1))
-
-
--- Without using `zPos`: --
--- rotateCube U = rotateCubeUp U
--- rotateCube U' = rotateCubeUp U'
--- rotateCube D = rotateCubeDown D'
--- rotateCube D' = rotateCubeDown D
--- rotateCubeUp = rotateCubeGeneric reorientZ mappedCorners mappedEdges where
---     mappedEdges = (
---             (Left,Up),
---             (Back,Up),
---             (Right,Up),
---             (Front,Up)
---         )
---     mappedCorners = (
---             (Left, Front, Up),
---             (Left, Back, Up),
---             (Right, Back, Up),
---             (Right, Front, Up)
---         )
--- rotateCubeDown = rotateCubeGeneric reorientZ mappedCorners mappedEdges where
---     mappedEdges = (
---             (Left,Down),
---             (Back,Down),
---             (Right,Down),
---             (Front,Down)
---         )
---     mappedCorners = (
---             (Left, Front, Down),
---             (Left, Back, Down),
---             (Right, Back, Down),
---             (Right, Front, Down)
---         )

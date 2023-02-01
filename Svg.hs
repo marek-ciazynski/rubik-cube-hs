@@ -2,9 +2,6 @@ module Svg where
 
 import Cube
 import Prelude hiding (Left, Right)
-import System.Environment (getArgs)
-import CubeReader (readCube)
-import TestCubes (solvedCube, exampleCube)
 
 
 faceColorToHex :: Color -> String
@@ -94,16 +91,3 @@ cubeToSvg cube =
         corner = getCorner cube
 
 writeCubeSvg fileName = writeFile fileName . cubeToSvg
-
--- Test --
--- TODO remove
-readExampleCube fileName = do
-    text <- readFile fileName
-    let cube = readCube (lines text) in
-        writeCubeSvg "examples/solved-cube.svg" cube
-
-main = do
-    -- writeCubeSvg solvedCube
-    readExampleCube "examples/solved-cube.txt"
-    -- writeCubeSvg exampleCube
-    -- readExampleCube "example-cube.txt"
